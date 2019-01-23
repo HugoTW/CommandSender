@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sender"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Sender" Height="350" Width="525">
     <Grid>
-        
+        <TextBox  x:Name="txtCommand" HorizontalAlignment="Left" Height="37" Margin="151,60,0,0" TextWrapping="Wrap" Text="-color #FFFFFF" VerticalAlignment="Top" Width="238" FontSize="22"/>
+        <Label Content="Parameter" HorizontalAlignment="Left" Margin="25,57,0,0" VerticalAlignment="Top" FontSize="22"/>
+        <Button Content="Send" HorizontalAlignment="Left" Margin="415,63,0,0" VerticalAlignment="Top" Width="75" FontSize="22" Click="Command_Sent"/>
+
     </Grid>
 </Window>
