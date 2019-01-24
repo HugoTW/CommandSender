@@ -83,14 +83,18 @@ namespace Sender
         private void Command_Sent(object sender, RoutedEventArgs e)
         {
 
-            UpdateSharedMemory();
+            //UpdateSharedMemory();
 
-            Debug.WriteLine("command:" + txtCommand.Text);
+
 
             //if (IsProcessOpen("Receiver"))
             //{
-            //    //processPath = "C:\\SingletonApp.exe";
-            //    System.Diagnostics.Process.Start(processPath, " -color MYINFO");
+            //processPath = "C:\\SingletonApp.exe";
+
+                 processPath = "Y:\\Project\\02_Win\\ColorCommand\\Receiver\\Receiver\\Receiver\\bin\\Debug\\Receiver.exe";
+                Debug.WriteLine("Moz -processPath:" + processPath);
+                 Debug.WriteLine("Moz - sender command:" + txtCommand.Text);
+                System.Diagnostics.Process.Start(processPath, txtCommand.Text);
 
             //}
 
