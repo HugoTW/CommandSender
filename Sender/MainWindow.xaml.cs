@@ -30,12 +30,11 @@ namespace Sender
     {
 
         string processPath;
-
+        string targetPorcess = "Receiver"; // change target process name if needed
 
         public MainWindow()
         {
             InitializeComponent();
-        
         }
 
  
@@ -44,7 +43,7 @@ namespace Sender
         {
 
 
-            if (IsProcessOpen("Receiver"))
+            if (IsProcessOpen( targetPorcess ))
             {
 
                 //processPath = "Y:\\Project\\02_Win\\ColorCommand\\Receiver\\Receiver\\Receiver\\bin\\Debug\\Receiver.exe";
@@ -67,11 +66,8 @@ namespace Sender
                     // Get process full path
                     Console.WriteLine(clsProcess.MainModule.FileName);
 
-                    if (name == "Receiver")
-                    {
-                        processPath = clsProcess.MainModule.FileName;
+                     processPath = clsProcess.MainModule.FileName;
 
-                    }
                     return true;
                 }
             }
