@@ -87,16 +87,17 @@ namespace Sender
 
 
 
-            //if (IsProcessOpen("Receiver"))
-            //{
-            //processPath = "C:\\SingletonApp.exe";
+            if (IsProcessOpen("Receiver"))
+            {
 
-                 processPath = "Y:\\Project\\02_Win\\ColorCommand\\Receiver\\Receiver\\Receiver\\bin\\Debug\\Receiver.exe";
+                //processPath = "Y:\\Project\\02_Win\\ColorCommand\\Receiver\\Receiver\\Receiver\\bin\\Debug\\Receiver.exe";
+                //processPath = "mozbii";
+
                 Debug.WriteLine("Moz -processPath:" + processPath);
                  Debug.WriteLine("Moz - sender command:" + txtCommand.Text);
                 System.Diagnostics.Process.Start(processPath, txtCommand.Text);
 
-            //}
+            }
 
 
         }
