@@ -29,62 +29,19 @@ namespace Sender
     public partial class MainWindow : Window
     {
 
-        const int MMF_MAX_SIZE = 1024;  // allocated memory for this memory mapped file (bytes)
-        const int MMF_VIEW_SIZE = 1024; // how many bytes of the allocated memory can this process access
-
-        // creates the memory mapped file which allows 'Reading' and 'Writing'
-        MemoryMappedFile mmf;
-        // creates a stream for this process, which allows it to write data from offset 0 to 1024 (whole memory)
-        MemoryMappedViewStream mmvStream;
-
         string processPath;
 
 
         public MainWindow()
         {
             InitializeComponent();
-
-
-            Thread t3 = new Thread(() => InitSharedMemory());
-            t3.Start();
+        
         }
 
  
 
-        public void InitSharedMemory()
-        {
-            // creates the memory mapped file which allows 'Reading' and 'Writing'
-            mmf = MemoryMappedFile.CreateOrOpen("mmf1", MMF_MAX_SIZE, MemoryMappedFileAccess.ReadWrite);
-            // creates a stream for this process, which allows it to write data from offset 0 to 1024 (whole memory)
-            mmvStream = mmf.CreateViewStream(0, MMF_VIEW_SIZE);
-
-            UpdateSharedMemory();
-         
-        }
-
-        public void UpdateSharedMemory()
-        {
-            // this is what we want to write to the memory mapped file
-            String message1 = "";
-
-            this.Dispatcher.Invoke(() =>
-            {
-                message1 = txtCommand.Text;
-            });
-
-            // serialize the variable 'message1' and write it to the memory mapped file
-            BinaryFormatter formatter = new BinaryFormatter();
-            formatter.Serialize(mmvStream, message1);
-            mmvStream.Seek(0, SeekOrigin.Begin); // sets the current position back to the beginning of the stream
-        }
-
-
-
         private void Command_Sent(object sender, RoutedEventArgs e)
         {
-
-            //UpdateSharedMemory();
-
 
 
             if (IsProcessOpen("Receiver"))
@@ -94,11 +51,10 @@ namespace Sender
                 //processPath = "mozbii";
 
                 Debug.WriteLine("Moz -processPath:" + processPath);
-                 Debug.WriteLine("Moz - sender command:" + txtCommand.Text);
+                Debug.WriteLine("Moz - sender command:" + txtCommand.Text);
                 System.Diagnostics.Process.Start(processPath, txtCommand.Text);
 
             }
-
 
         }
 
@@ -122,19 +78,6 @@ namespace Sender
 
             return false;
         }
-
-
-        public void TestSend()
-        {
-            Process[] NewProcessList2 =
-                      Process.GetProcessesByName("Receiver");
-            foreach (Process TempProcess in NewProcessList2)
-            {
-                // BUG :
-                TempProcess.MainModule.GetType().GetMethod("TestFun").Invoke(TempProcess.MainModule, null);
-            }
-        }
-
 
 
     }
